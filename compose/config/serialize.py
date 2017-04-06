@@ -111,9 +111,9 @@ def denormalize_service_dict(service_dict, version, image_digest=None):
             )
 
     if 'ports' in service_dict and version not in (V3_2,):
-        service_dict['ports'] = map(
+        service_dict['ports'] = list(map(
             lambda p: p.legacy_repr() if isinstance(p, types.ServicePort) else p,
             service_dict['ports']
-        )
+        ))
 
     return service_dict
